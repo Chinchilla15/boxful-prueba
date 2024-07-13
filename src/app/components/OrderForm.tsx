@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Form, Input, Button, DatePicker, Select } from "antd";
 import PhoneField from "../components/PhoneField";
 import { municipalityByDepartment } from "./municipalityByDepartment";
@@ -22,13 +22,29 @@ interface OrderFormValues {
 
 interface OrderFormProps {
 	onFinish: () => void;
+	formInfo: OrderFormValues;
+	onFormSave: (field: string, value: string) => void;
 }
 
-const OrderForm: React.FC<OrderFormProps> = ({ onFinish }) => {
+const OrderForm: React.FC<OrderFormProps> = ({
+	onFinish,
+	formInfo,
+	onFormSave,
+}) => {
 	const [form] = Form.useForm<OrderFormValues>();
 	const [selectedDepartment, setSelectedDepartment] = useState<
 		string | undefined
 	>(undefined);
+
+	useEffect(() => {
+		form.setFieldsValue(formInfo);
+	}, [formInfo]);
+
+	const handleValuesChange = (changedValues: any) => {
+		Object.keys(changedValues).forEach((key) => {
+			onFormSave(key, changedValues[key]);
+		});
+	};
 
 	const handleDepartmentChange = (value: string) => {
 		setSelectedDepartment(value);
@@ -47,7 +63,9 @@ const OrderForm: React.FC<OrderFormProps> = ({ onFinish }) => {
 			name="order_form"
 			layout="vertical"
 			onFinish={handleSubmit}
+			onValuesChange={handleValuesChange}
 			className="grid grid-cols-3 grid-rows-6	gap-2 "
+			initialValues={formInfo}
 		>
 			<Form.Item
 				name="pickup_address"
