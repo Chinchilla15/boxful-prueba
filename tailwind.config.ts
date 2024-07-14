@@ -16,6 +16,11 @@ const config: Config = {
 			fontFamily: {
 				albert_sans: ["var(--font-albert_sans)"],
 			},
+			colors: {
+				"bold-blue": "#4D5568",
+				"regular-blue": "#7682A0",
+				"background-grey": "#F3F5F9",
+			},
 		},
 	},
 	plugins: [],
