@@ -31,7 +31,7 @@ interface OrderFormValues {
 }
 
 const FormContainer: React.FC = () => {
-	const [showOrderItems, setShowOrderItems] = useState(false);
+	const [showOrderItems, setShowOrderItems] = useState(true);
 	const [showMessage, setShowMessage] = useState(false);
 	const [formInfo, setFormInfo] = useState<OrderFormValues>({
 		pickup_address: "",
@@ -76,15 +76,32 @@ const FormContainer: React.FC = () => {
 	};
 
 	const handleSubmit = async () => {
+		const API_URL = "http://localhost:3001";
 		const payload = {
-			...formInfo,
-			products: productEntries,
+			pickup_address: formInfo.pickup_address,
+			pickup_date: formInfo.pickup_date,
+			first_name: formInfo.first_name,
+			last_name: formInfo.last_name,
+			email: formInfo.email,
+			phone: formInfo.phone,
+			destination_address: formInfo.destination_address,
+			department: formInfo.department,
+			municipality: formInfo.municipality,
+			reference_point: formInfo.reference_point,
+			instructions: formInfo.instructions,
+			products: productEntries.map((product) => ({
+				id: product.id,
+				item_name: product.item_name,
+				item_length: Number(product.item_length),
+				item_width: Number(product.item_width),
+				item_height: Number(product.item_height),
+				item_weight: Number(product.item_weight),
+			})),
 		};
 		console.log("Submitting payload:", payload);
-		setShowMessage(true);
 
 		try {
-			const response = await fetch("YOUR_API_ENDPOINT", {
+			const response = await fetch(`${API_URL}/packages`, {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
@@ -95,6 +112,8 @@ const FormContainer: React.FC = () => {
 			if (!response.ok) {
 				throw new Error("Network response was not ok");
 			}
+
+			setShowMessage(true);
 
 			const data = await response.json();
 			console.log("Success:", data);
@@ -108,44 +127,53 @@ const FormContainer: React.FC = () => {
 			id="form-container"
 			className="w-full max-w-5xl pt-12 bg-white rounded-lg shadow-lg flex flex-col justify-center items-center"
 		>
-			{!showOrderItems ? (
-				<OrderForm
-					onFinish={() => setShowOrderItems(true)}
-					formInfo={formInfo}
-					onFormSave={handleFormInfoSave}
-				/>
+			{showMessage ? (
+				<Message />
 			) : (
 				<Fragment>
-					<OrderItems onSaveProduct={handleSaveProduct} />
-					{productEntries.map((product) => (
-						<Product
-							key={product.id}
-							product={product}
-							onDelete={() => handleDeleteProduct(product.id)}
-							onUpdate={handleProductUpdate}
+					{!showOrderItems ? (
+						<OrderForm
+							onFinish={() => setShowOrderItems(true)}
+							formInfo={formInfo}
+							onFormSave={handleFormInfoSave}
 						/>
-					))}
+					) : (
+						<Fragment>
+							<OrderItems onSaveProduct={handleSaveProduct} />
+							{productEntries.map((product) => (
+								<Product
+									key={product.id}
+									product={product}
+									onDelete={() =>
+										handleDeleteProduct(product.id)
+									}
+									onUpdate={handleProductUpdate}
+								/>
+							))}
 
-					<div className="flex justify-between w-11/12 mt-10 mb-2">
-						<Form.Item className="justify-self-start">
-							<Button
-								size="large"
-								className="custom-ant-btn"
-								onClick={() => setShowOrderItems(false)}
-							>
-								<img src="/arrow-left.svg" alt="" /> Regresar
-							</Button>
-						</Form.Item>
-						<Form.Item className="justify-self-end">
-							<Button
-								type="primary"
-								size="large"
-								onClick={handleSubmit}
-							>
-								Enviar <img src="/arrow.svg" alt="" />
-							</Button>
-						</Form.Item>
-					</div>
+							<div className="flex justify-between w-11/12 mt-10 mb-2">
+								<Form.Item className="justify-self-start">
+									<Button
+										size="large"
+										className="custom-ant-btn"
+										onClick={() => setShowOrderItems(false)}
+									>
+										<img src="/arrow-left.svg" alt="" />{" "}
+										Regresar
+									</Button>
+								</Form.Item>
+								<Form.Item className="justify-self-end">
+									<Button
+										type="primary"
+										size="large"
+										onClick={handleSubmit}
+									>
+										Enviar <img src="/arrow.svg" alt="" />
+									</Button>
+								</Form.Item>
+							</div>
+						</Fragment>
+					)}
 				</Fragment>
 			)}
 		</div>
