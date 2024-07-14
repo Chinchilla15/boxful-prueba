@@ -35,10 +35,7 @@ const Product: React.FC<ProductProps> = ({ product, onDelete, onUpdate }) => {
 			initialValues={product}
 			onValuesChange={(_, values) => handleSubmit(values)}
 		>
-			<p className="text-regular-blue text-xs w-11/12 mt-4 mb-2">
-				Agrega tus bultos
-			</p>
-			<div className="rounded-lg grid grid-rows-1 grid-cols-6 content-center w-11/12  gap-x-4 border border-green-500 px-3 pt-1">
+			<div className="rounded-lg grid grid-rows-1 grid-cols-6 content-center w-11/12  gap-x-4 border border-green-500 px-3 pt-1 mb-6">
 				<Form.Item
 					name="item_weight"
 					className="col-span-1"

@@ -141,6 +141,9 @@ const OrderForm: React.FC<OrderItemsProps> = ({ onSaveProduct }) => {
 					</Form.Item>
 				</div>
 			</Form>
+			<p className="text-regular-blue text-xs w-11/12 mt-4 mb-2">
+				Agrega tus bultos
+			</p>
 		</Fragment>
 	);
 };
