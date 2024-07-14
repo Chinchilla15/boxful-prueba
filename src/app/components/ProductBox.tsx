@@ -40,7 +40,7 @@ const Product: React.FC<ProductProps> = ({ product, onDelete, onUpdate }) => {
 			</p>
 			<div className="rounded-lg grid grid-rows-1 grid-cols-6 content-center w-11/12  gap-x-4 border border-green-500 px-3 pt-1">
 				<Form.Item
-					name="item_weigth"
+					name="item_weight"
 					className="col-span-1"
 					label={
 						<span className="text-regular-blue text-xs">
@@ -80,7 +80,7 @@ const Product: React.FC<ProductProps> = ({ product, onDelete, onUpdate }) => {
 						<Input suffix={"cm"} />
 					</Form.Item>
 					<Form.Item
-						name="item_heigth"
+						name="item_height"
 						label={
 							<span className="text-regular-blue text-xs">
 								Alto

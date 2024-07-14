@@ -57,14 +57,14 @@ const OrderForm: React.FC<OrderItemsProps> = ({ onSaveProduct }) => {
 							rules={[
 								{
 									required: true,
-									message: "TEST",
+									message: "Requerido",
 								},
 							]}
 						>
 							<Input suffix={"cm"} />
 						</Form.Item>
 						<Form.Item
-							name="item_heigth"
+							name="item_height"
 							label={
 								<span className="text-regular-blue text-xs">
 									Alto
@@ -73,7 +73,7 @@ const OrderForm: React.FC<OrderItemsProps> = ({ onSaveProduct }) => {
 							rules={[
 								{
 									required: true,
-									message: "TEST",
+									message: "Requerido",
 								},
 							]}
 						>
@@ -89,7 +89,7 @@ const OrderForm: React.FC<OrderItemsProps> = ({ onSaveProduct }) => {
 							rules={[
 								{
 									required: true,
-									message: "TEST",
+									message: "Requerido",
 								},
 							]}
 						>
@@ -97,7 +97,7 @@ const OrderForm: React.FC<OrderItemsProps> = ({ onSaveProduct }) => {
 						</Form.Item>
 					</div>
 					<Form.Item
-						name="item_weigth"
+						name="item_weight"
 						className="col-span-1"
 						label={
 							<span className="text-regular-blue text-xs">
@@ -107,7 +107,7 @@ const OrderForm: React.FC<OrderItemsProps> = ({ onSaveProduct }) => {
 						rules={[
 							{
 								required: true,
-								message: "TEST",
+								message: "Requerido",
 							},
 						]}
 					>
@@ -124,7 +124,7 @@ const OrderForm: React.FC<OrderItemsProps> = ({ onSaveProduct }) => {
 						rules={[
 							{
 								required: true,
-								message: "TEST",
+								message: "Requerido",
 							},
 						]}
 					>
