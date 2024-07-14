@@ -31,7 +31,7 @@ interface OrderFormValues {
 }
 
 const FormContainer: React.FC = () => {
-	const [showOrderItems, setShowOrderItems] = useState(false);
+	const [showOrderItems, setShowOrderItems] = useState(true);
 	const [showMessage, setShowMessage] = useState(false);
 	const [formInfo, setFormInfo] = useState<OrderFormValues>({
 		pickup_address: "",
@@ -125,7 +125,7 @@ const FormContainer: React.FC = () => {
 	return (
 		<div
 			id="form-container"
-			className="w-full max-w-5xl pt-12 bg-white rounded-lg shadow-lg flex flex-col justify-center items-center"
+			className="w-full max-w-5xl pt-12 mb-12 bg-white rounded-lg shadow-lg flex flex-col justify-center items-center"
 		>
 			{showMessage ? (
 				<Message />
