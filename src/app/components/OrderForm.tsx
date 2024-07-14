@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { Form, Input, Button, DatePicker, Select } from "antd";
 import PhoneField from "../components/PhoneField";
 import { municipalityByDepartment } from "./municipalityByDepartment";
+import dayjs from "dayjs";
 
 const { Option } = Select;
 
@@ -99,9 +100,13 @@ const OrderForm: React.FC<OrderFormProps> = ({
 						message: "Por favor ingresa la fecha programada!",
 					},
 				]}
+				getValueFromEvent={(e: any) => e?.format("YYYY-MM-DD")}
+				getValueProps={(e: string) => ({
+					value: e ? dayjs(e) : "",
+				})}
 			>
 				<DatePicker
-					format="DD/MM/YYYY"
+					format="YYYY-MM-DD"
 					style={{ width: "100%" }}
 					suffixIcon={<img src="/calendar.svg" alt="Calendar Icon" />}
 				/>
